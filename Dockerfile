@@ -7,6 +7,8 @@ LABEL maintainer="henrykobutra@gmail.com"
 ENV HUGO_VERSION 0.53
 
 RUN  apt-get update \
+     # Install latest chrome dev package, which installs the necessary libs to
+     # make the bundled version of Chromium that Puppeteer installs work.
      && apt-get install -y wget ca-certificates git --no-install-recommends \
      && update-ca-certificates  \
      && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -21,7 +23,7 @@ RUN  apt-get update \
     && tar xzf hugo.tar.gz  \
     && mv hugo /usr/bin/hugo  \
     # && rm -r *  \
-    && apk del --purge wget  \
+    # && apk del --purge wget  \
     && npm install -g firebase-tools --unsafe-perm
 
 # Install Puppeteer under /node_modules so it's available system-wide
