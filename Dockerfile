@@ -29,3 +29,5 @@ RUN set -x && \
   # install firebase-cli
   # use --unsafe-perm to solve the issue: https://github.com/firebase/firebase-tools/issues/372
   npm install -g firebase-tools --unsafe-perm
+  # install puppeteer ... remove if you don't need ... but I need it :P it's a large file ... so you might want to remove it.
+  npm i puppeteer
