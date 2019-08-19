@@ -15,7 +15,6 @@ RUN apk add --no-cache \
       freetype \
       freetype-dev \
       harfbuzz \
-      ca-certificates \
       ttf-freefont \
       yarn 
 
