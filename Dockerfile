@@ -14,7 +14,7 @@ ENV HUGO_VERSION 0.53
 RUN  apt-get update \
      # Install latest chrome dev package, which installs the necessary libs to
      # make the bundled version of Chromium that Puppeteer installs work.
-     && apt-get install -y wget --no-install-recommends \
+     && apt-get install -y wget ca-certificates git --no-install-recommends \
      && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
      && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
      && apt-get update \
@@ -27,7 +27,6 @@ RUN  apt-get update \
 
 # install hugo
 RUN set -x && \
-  apt-get install wget ca-certificates git && \
   # make sure we have up-to-date certificates
   update-ca-certificates && \
   cd /tmp &&\
@@ -35,8 +34,6 @@ RUN set -x && \
   tar xzf hugo.tar.gz && \
   mv hugo /usr/bin/hugo && \
   rm -r * && \
-  # don't delete ca-certificates pacakge here since it remove all certs too
-  apt-get remove wget && \
   # install firebase-cli
   # use --unsafe-perm to solve the issue: https://github.com/firebase/firebase-tools/issues/372
   npm install -g firebase-tools --unsafe-perm
